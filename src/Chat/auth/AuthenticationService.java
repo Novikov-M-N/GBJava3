@@ -1,4 +1,4 @@
-package lesson3Homework.auth;
+package Chat.auth;
 
 public interface AuthenticationService {
     void start();

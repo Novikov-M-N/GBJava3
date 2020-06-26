@@ -1,8 +1,7 @@
-package lesson3Homework;
+package Chat;
 
-import lesson3Homework.auth.AuthenticationService;
-import lesson3Homework.auth.DatabaseAuthService;
-import lesson3Homework.auth.PlainAuthService;
+import Chat.auth.AuthenticationService;
+import Chat.auth.DatabaseAuthService;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -17,15 +16,18 @@ public class MyServer {
     private final int PORT = 8189;
     private List<ClientHandler> clients;
     private AuthenticationService authService;
+    private Moderator moderator;
 
     public AuthenticationService getAuthService() {
         return authService;
     }
+    public Moderator getModerator() { return moderator; }
 
     public MyServer() {
         try (ServerSocket server = new ServerSocket(PORT)) {
             authService = new DatabaseAuthService();
             authService.start();
+            moderator = new Moderator();
             clients = new ArrayList<>();
             while (true) {
                 System.out.println("Server awaits clients");
@@ -58,7 +60,8 @@ public class MyServer {
     }
 
     public synchronized void broadcast(String s, boolean addTime) {
-        if (addTime) s += "@" + LocalTime.now().format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT));
+        if (addTime) s += " @" + LocalTime.now().format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT));
+        s = moderator.moderate(s); // Пропускаем сообщение перед рассылкой через модератор
         for(ClientHandler client: clients) {
             client.sendMsg(s );
         }

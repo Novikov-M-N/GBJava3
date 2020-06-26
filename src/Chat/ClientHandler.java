@@ -1,4 +1,4 @@
-package lesson3Homework;
+package Chat;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -20,6 +20,7 @@ public class ClientHandler {
         this.myServer = myServer;
         this.socket = socket;
         this.name = "";
+
         try {
             this.in = new DataInputStream(socket.getInputStream());
             this.out = new DataOutputStream(socket.getOutputStream());
@@ -56,6 +57,7 @@ public class ClientHandler {
                 String message = in.readUTF();
                 System.out.println("From " + name + ":" + message);
                 if (message.equals("/end")) {
+                    sendMsg("/end");
                     closeConnection();
                     return;
                 }
@@ -74,12 +76,19 @@ public class ClientHandler {
                         if (myServer.getAuthService().changeNick(name, newNick)) {
                             // Рассылаем всем в чате сообщение о том, что у пользователя теперь новый ник
                             myServer.broadcast(name + " now is " + newNick, true);
+                            sendMsg("/yournick " + newNick);
                             // И непосредственно самому объекту пользователь меняем ник
                             name = newNick;
-                        } else { sendMsg("Error of change nick. Try again"); }
+                        } else {
+                            sendMsg("Error of change nick. Try again");
+                        }
                     // Если ник уже занят, сообщаем пользователю об этом
-                    } else { sendMsg("Nick " + newNick + " is already in use. Enter another nick."); }
-                } else myServer.broadcast(name + ": " + message, true);
+                    } else {
+                        sendMsg("Nick " + newNick + " is already in use. Enter another nick.");
+                    }
+                } else {
+                    myServer.broadcast(name + ": " + message, true);
+                }
             }
         }
     }
