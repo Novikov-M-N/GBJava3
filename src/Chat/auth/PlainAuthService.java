@@ -1,4 +1,4 @@
-package lesson3Homework.auth;
+package Chat.auth;
 
 import java.sql.*;
 import java.util.ArrayList;
