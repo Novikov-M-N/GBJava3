@@ -170,3 +170,146 @@
 2020-06-26 15:49:45 * nick1: у меня закончились соединители Scotch-lock @15:49
 2020-06-26 15:50:27 * nick1: кабель UTP-5E улетает, как в трубу @15:50
 2020-06-26 15:50:46 * Disconnect from server
+2020-07-02 22:06:23 * Login attempt...
+2020-07-02 22:06:23 * Authorization successfull. Nick: nick1
+2020-07-02 22:06:23 * /clients nick1
+2020-07-02 22:07:06 * nick1: привет @22:07
+2020-07-02 22:08:00 * nick2 is in chat @22:07
+2020-07-02 22:08:00 * /clients nick1 nick2
+2020-07-02 22:08:15 * nick2: привет @22:08
+2020-07-02 22:08:42 * nick1: /w nick2 работает? @22:08
+2020-07-02 22:10:48 * nick3 is in chat @22:10
+2020-07-02 22:10:48 * /clients nick1 nick2 nick3
+2020-07-02 22:11:19 * (direct) nick3:  hi@22:11
+2020-07-02 22:11:19 * nick3: /w nick1 hi @22:11
+2020-07-02 22:12:50 * nick1:  @22:12
+2020-07-02 22:12:50 * (direct) nick1:  ff@22:12
+2020-07-02 22:12:50 * nick1: /w nick1 ff @22:12
+2020-07-02 22:13:54 * nick1: /w qw ew @22:13
+2020-07-02 22:14:17 * Disconnect from server
+2020-07-02 22:08:00 * Login attempt...
+2020-07-02 22:08:00 * Authorization successfull. Nick: nick2
+2020-07-02 22:08:00 * /clients nick1 nick2
+2020-07-02 22:08:15 * nick2: привет @22:08
+2020-07-02 22:08:42 * (direct) nick1:  работает?@22:08
+2020-07-02 22:08:42 * nick1: /w nick2 работает? @22:08
+2020-07-02 22:10:48 * nick3 is in chat @22:10
+2020-07-02 22:10:48 * /clients nick1 nick2 nick3
+2020-07-02 22:11:19 * nick3: /w nick1 hi @22:11
+2020-07-02 22:12:50 * nick1:  @22:12
+2020-07-02 22:12:50 * nick1: /w nick1 ff @22:12
+2020-07-02 22:13:54 * nick1: /w qw ew @22:13
+2020-07-02 22:14:17 * /clients nick2 nick3
+2020-07-02 22:14:17 * User nick1 left @22:14
+2020-07-02 22:14:17 * /clients nick2 nick3
+2020-07-02 22:14:17 * User nick1 left @22:14
+2020-07-02 22:15:38 * nick2: /w nick3 ww @22:15
+2020-07-02 22:17:37 * Disconnect from server
+2020-07-02 22:10:48 * Login attempt...
+2020-07-02 22:10:48 * Authorization successfull. Nick: nick3
+2020-07-02 22:10:48 * /clients nick1 nick2 nick3
+2020-07-02 22:11:19 * nick3: /w nick1 hi @22:11
+2020-07-02 22:12:50 * nick1:  @22:12
+2020-07-02 22:12:50 * nick1: /w nick1 ff @22:12
+2020-07-02 22:13:54 * nick1: /w qw ew @22:13
+2020-07-02 22:14:17 * /clients nick2 nick3
+2020-07-02 22:14:17 * User nick1 left @22:14
+2020-07-02 22:14:17 * /clients nick2 nick3
+2020-07-02 22:14:17 * User nick1 left @22:14
+2020-07-02 22:15:38 * (direct) nick2:  ww@22:15
+2020-07-02 22:15:38 * nick2: /w nick3 ww @22:15
+2020-07-02 22:17:37 * /clients nick3
+2020-07-02 22:17:37 * User nick2 left @22:17
+2020-07-02 22:17:37 * /clients nick3
+2020-07-02 22:17:37 * User nick2 left @22:17
+2020-07-02 22:17:50 * Disconnect from server
+2020-07-02 22:22:14 * Login attempt...
+2020-07-02 22:22:14 * Authorization successfull. Nick: nick1
+2020-07-02 22:22:14 * /clients nick1
+2020-07-02 22:22:53 * nick2 is in chat @22:22
+2020-07-02 22:22:53 * /clients nick1 nick2
+2020-07-02 22:23:38 * nick3 is in chat @22:23
+2020-07-02 22:23:38 * /clients nick1 nick2 nick3
+2020-07-02 22:24:02 * (direct) nick3:  hi@22:24
+2020-07-02 22:24:19 * Disconnect from server
+2020-07-02 22:22:53 * Login attempt...
+2020-07-02 22:22:54 * Authorization successfull. Nick: nick2
+2020-07-02 22:22:54 * /clients nick1 nick2
+2020-07-02 22:23:38 * nick3 is in chat @22:23
+2020-07-02 22:23:38 * /clients nick1 nick2 nick3
+2020-07-02 22:24:19 * /clients nick2 nick3
+2020-07-02 22:24:19 * User nick1 left @22:24
+2020-07-02 22:24:19 * /clients nick2 nick3
+2020-07-02 22:24:19 * User nick1 left @22:24
+2020-07-02 22:24:31 * Disconnect from server
+2020-07-02 22:23:38 * Login attempt...
+2020-07-02 22:23:39 * Authorization successfull. Nick: nick3
+2020-07-02 22:23:39 * /clients nick1 nick2 nick3
+2020-07-02 22:24:19 * /clients nick2 nick3
+2020-07-02 22:24:19 * User nick1 left @22:24
+2020-07-02 22:24:19 * /clients nick2 nick3
+2020-07-02 22:24:19 * User nick1 left @22:24
+2020-07-02 22:24:31 * /clients nick3
+2020-07-02 22:24:31 * User nick2 left @22:24
+2020-07-02 22:24:31 * /clients nick3
+2020-07-02 22:24:31 * User nick2 left @22:24
+2020-07-02 22:24:50 * Disconnect from server
+2020-07-02 23:57:13 * Login attempt...
+2020-07-02 23:57:13 * Authorization successfull. Nick: nick1
+2020-07-02 23:57:13 * /clients nick1
+2020-07-02 23:58:23 * nick2 is in chat @23:58
+2020-07-02 23:58:23 * /clients nick1 nick2
+2020-07-02 23:58:40 * nick3 is in chat @23:58
+2020-07-02 23:58:41 * /clients nick1 nick2 nick3
+2020-07-02 23:58:56 * nick1 now is nick0 @23:58
+2020-07-02 23:58:56 * NIck is changed. New nick: nick0
+2020-07-02 23:58:56 * /yournick nick0
+2020-07-02 23:59:30 * Incorrect command. Enter correct command or write message not beginning from "/"
+2020-07-03 00:00:06 * nick0 now is nick1 @00:00
+2020-07-03 00:00:06 * NIck is changed. New nick: nick1
+2020-07-03 00:00:06 * /yournick nick1
+2020-07-03 00:00:28 * Disconnect from server
+2020-07-02 23:58:23 * Login attempt...
+2020-07-02 23:58:23 * Authorization successfull. Nick: nick2
+2020-07-02 23:58:23 * /clients nick1 nick2
+2020-07-02 23:58:40 * nick3 is in chat @23:58
+2020-07-02 23:58:41 * /clients nick1 nick2 nick3
+2020-07-02 23:58:56 * nick1 now is nick0 @23:58
+2020-07-03 00:00:06 * nick0 now is nick1 @00:00
+2020-07-03 00:00:14 * (direct) nick1:  hi@00:00
+2020-07-03 00:00:28 * /clients nick2 nick3
+2020-07-03 00:00:28 * User nick1 left @00:00
+2020-07-03 00:00:29 * /clients nick2 nick3
+2020-07-03 00:00:29 * User nick1 left @00:00
+2020-07-03 00:00:46 * Disconnect from server
+2020-07-02 23:58:41 * Login attempt...
+2020-07-02 23:58:41 * Authorization successfull. Nick: nick3
+2020-07-02 23:58:42 * /clients nick1 nick2 nick3
+2020-07-02 23:58:56 * nick1 now is nick0 @23:58
+2020-07-03 00:00:06 * nick0 now is nick1 @00:00
+2020-07-03 00:00:28 * /clients nick2 nick3
+2020-07-03 00:00:28 * User nick1 left @00:00
+2020-07-03 00:00:29 * /clients nick2 nick3
+2020-07-03 00:00:29 * User nick1 left @00:00
+2020-07-03 00:00:46 * /clients nick3
+2020-07-03 00:00:46 * User nick2 left @00:00
+2020-07-03 00:00:46 * /clients nick3
+2020-07-03 00:00:46 * User nick2 left @00:00
+2020-07-03 00:01:00 * Disconnect from server
+2020-07-03 00:14:52 * Login attempt...
+2020-07-03 00:14:52 * Authorization successfull. Nick: nick1
+2020-07-03 00:14:53 * /clients nick1
+2020-07-03 00:15:30 * nick2 is in chat @00:15
+2020-07-03 00:15:30 * /clients nick1 nick2
+2020-07-03 00:15:53 * nick1: hi @00:15
+2020-07-03 00:16:05 * (direct) nick2:  hi@00:16
+2020-07-03 00:16:14 * Disconnect from server
+2020-07-03 00:15:30 * Login attempt...
+2020-07-03 00:15:31 * Authorization successfull. Nick: nick2
+2020-07-03 00:15:31 * /clients nick1 nick2
+2020-07-03 00:15:53 * nick1: hi @00:15
+2020-07-03 00:16:14 * /clients nick2
+2020-07-03 00:16:14 * User nick1 left @00:16
+2020-07-03 00:16:14 * /clients nick2
+2020-07-03 00:16:14 * User nick1 left @00:16
+2020-07-03 00:18:33 * Disconnect from server
