@@ -4,17 +4,27 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class ClientHandler {
-    private MyServer myServer;
-    private Socket socket;
-    private DataInputStream in;
-    private DataOutputStream out;
+    private final MyServer myServer;
+    private final Socket socket;
+    private final DataInputStream in;
+    private final DataOutputStream out;
     private String name;
+    //Пул потоков для обмена данными с сервером. Статический, т.к. для каждого клиент хэндлера поток свой,
+    //а пул один на всех. Количество клиентов заранее мы не знаем, поэтому CachedThreadPool.
+    private static final ExecutorService executorService = Executors.newCachedThreadPool();
 
     public String getName() {
         return name;
     }
+
+    /**
+     * Остановка пула потоков обмена данными с сервером
+     */
+    public static void shutdownExecutor() { executorService.shutdown(); }
 
     public ClientHandler(MyServer myServer, Socket socket) {
         this.myServer = myServer;
@@ -24,7 +34,8 @@ public class ClientHandler {
         try {
             this.in = new DataInputStream(socket.getInputStream());
             this.out = new DataOutputStream(socket.getOutputStream());
-            new Thread(()-> {
+            //Вместо вызова потока теперь передаём задачу на выполнение в пул потоков
+            executorService.execute(()-> {
                 try {
                     authenticate();
                     readMessages();
@@ -33,13 +44,55 @@ public class ClientHandler {
                 } finally {
                     closeConnection();
                 }
-            }).start();
+            });
         } catch (IOException ex) {
             throw new RuntimeException("Client creation error");
         }
     }
 
+    private void alterNick(String newNick) {
+        // Если такого ника в БД пользователей нет, то производим смену ника
+        if (!myServer.getAuthService().isNickExist(newNick)) {
+            if (myServer.getAuthService().changeNick(name, newNick)) {
+                // Рассылаем всем в чате сообщение о том, что у пользователя теперь новый ник
+                myServer.broadcast(name + " now is " + newNick, true);
+                sendMsg("Your new nick is " + newNick);
+                // И непосредственно самому объекту пользователь меняем ник
+                name = newNick;
+            } else {
+                sendMsg("Error of change nick. Try again");
+            }
+            // Если ник уже занят, сообщаем пользователю об этом
+        } else {
+            sendMsg("Nick " + newNick + " is already in use. Enter another nick.");
+        }
+    }
+
+    /**
+     * Обработка служебных сообщений - тех, которые начинаются с символа "/"
+     * @param message Входящее сообщение
+     */
+    private void serviceMessageProcessing(String message) {
+        String[] parts = message.split("\\s");
+        String command = parts[0].substring(1);
+        switch (command){
+            case "w": { //Отправка приватного сообщения
+                String realMessage = message.substring(message.indexOf(" ", message.indexOf(" ") + 1));
+                myServer.sendDirect(parts[1],name + ": " + realMessage);
+                break;
+            } case "alternick": { //Смена ника
+                alterNick(parts[1]);
+                break;
+            } case "end": { //Выход из чата
+                sendMsg("/end");
+                closeConnection();
+            } default: { sendMsg("Incorrect command. Enter correct command or write message not beginning from \"/\""); }
+        }
+    }
+
     private void closeConnection() {
+        myServer.unsubscribe(this);
+        myServer.broadcast("User " + name + " left", true);
         try {
             in.close();
             out.close();
@@ -47,8 +100,6 @@ public class ClientHandler {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        myServer.unsubscribe(this);
-        myServer.broadcast("User " + name + " left", true);
     }
 
     private void readMessages() throws IOException {
@@ -56,37 +107,7 @@ public class ClientHandler {
             if (in.available()>0) {
                 String message = in.readUTF();
                 System.out.println("From " + name + ":" + message);
-                if (message.equals("/end")) {
-                    sendMsg("/end");
-                    closeConnection();
-                    return;
-                }
-                if (message.startsWith("/w ")) {
-                    String[] parts = message.split("\\s");
-                    String realMessage = message.substring(message.indexOf(" ", message.indexOf(" ") + 1));
-                    myServer.sendDirect(parts[1],name+ ": "+ realMessage);
-                }
-                // Для смены ника нужно отправить сообщение с префиксом /alternick
-                if (message.startsWith("/alternick ")) {
-                    // Парсим строку для вычленения нового ника (он должен быть без пробелов, иначе будет урезан до первого пробела)
-                    String[] parts = message.split("\\s");
-                    String newNick = parts[1];
-                    // Если такого ника в БД пользователей нет, то производим смену ника
-                    if (!myServer.getAuthService().isNickExist(newNick)) {
-                        if (myServer.getAuthService().changeNick(name, newNick)) {
-                            // Рассылаем всем в чате сообщение о том, что у пользователя теперь новый ник
-                            myServer.broadcast(name + " now is " + newNick, true);
-                            sendMsg("/yournick " + newNick);
-                            // И непосредственно самому объекту пользователь меняем ник
-                            name = newNick;
-                        } else {
-                            sendMsg("Error of change nick. Try again");
-                        }
-                    // Если ник уже занят, сообщаем пользователю об этом
-                    } else {
-                        sendMsg("Nick " + newNick + " is already in use. Enter another nick.");
-                    }
-                } else {
+                if (message.startsWith("/")) { serviceMessageProcessing(message); } else {
                     myServer.broadcast(name + ": " + message, true);
                 }
             }

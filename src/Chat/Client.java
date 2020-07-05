@@ -8,7 +8,7 @@ import static java.lang.System.*;
 
 public class Client {
     private static boolean authorized = false;
-    //Р›РѕРіРіРµСЂ - РѕР±СЉРµРєС‚, РѕС‚РІРµС‡Р°СЋС‰РёР№ Р·Р° Р·Р°РїРёСЃСЊ СЃРѕРѕР±С‰РµРЅРёР№ РІ Р»РѕРі Рё РІС‹РґР°С‡Сѓ РёС… РѕС‚С‚СѓРґР°
+    //Логгер - объект, отвечающий за запись сообщений в лог и выдачу их оттуда
     private static Logger logger = new Logger();
 
     public Logger getLogger() { return logger; }
@@ -19,7 +19,7 @@ public class Client {
             socket = new Socket("localhost", 8189);
             DataInputStream in = new DataInputStream(socket.getInputStream());
             DataOutputStream out = new DataOutputStream(socket.getOutputStream());
-            // РЎС‡РёС‚С‹РІР°РµРј РёР· РєРѕРЅСЃРѕР»Рё Р»РѕРіРёРЅ Рё РїР°СЂРѕР»СЊ, РѕС‚РїСЂР°РІР»СЏРµРј Р·Р°РїСЂРѕСЃ Р°РІС‚РѕСЂРёР·Р°С†РёРё РЅР° СЃРµСЂРІРµСЂ
+            // Считываем из консоли логин и пароль, отправляем запрос авторизации на сервер
             BufferedReader consoleIn = new BufferedReader(new InputStreamReader(System.in));
             System.out.println("Enter your login:");
             String login = consoleIn.readLine();

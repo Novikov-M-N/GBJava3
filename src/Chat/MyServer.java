@@ -21,7 +21,6 @@ public class MyServer {
     public AuthenticationService getAuthService() {
         return authService;
     }
-    public Moderator getModerator() { return moderator; }
 
     public MyServer() {
         try (ServerSocket server = new ServerSocket(PORT)) {
@@ -40,6 +39,8 @@ public class MyServer {
         } finally {
             if(authService!=null) {
                 authService.stop();
+                //При завершении работы сервера отключаем пул потоков для клиентских интерфейсов
+                ClientHandler.shutdownExecutor();
             }
         }
     }
@@ -55,22 +56,18 @@ public class MyServer {
         broadcastClientsList();
     }
 
-    public synchronized void changeNick(ClientHandler clientHandler, String newNick) {
-        
-    }
-
     public synchronized void broadcast(String s, boolean addTime) {
         if (addTime) s += " @" + LocalTime.now().format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT));
         s = moderator.moderate(s); // Пропускаем сообщение перед рассылкой через модератор
         for(ClientHandler client: clients) {
-            client.sendMsg(s );
+            client.sendMsg(s);
         }
     }
 
     public synchronized void broadcastClientsList() {
         StringBuilder sb = new StringBuilder("/clients ");
         for (ClientHandler o : clients) {
-            sb.append(o.getName() + " ");
+            sb.append(o.getName()).append(" ");
         }
         broadcast(sb.toString(), false);
     }
